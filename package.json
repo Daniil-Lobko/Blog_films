@@ -1,0 +1,24 @@
+{
+  "name": "blog_films",
+  "version": "1.0.0",
+  "description": "blog about films",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "blog",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Lobko Daniil and Hrebenik Angelika",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

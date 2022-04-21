@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="padding-top: 50px;">
+        <div class = "row">
+            <div class = "col s12 m8 offset-m2 l6 offset-l3" id="posts">
+
+                <div class="center"><div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                    </div>
+                </div></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red modal-trigger" data-target="createForm">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+    <div id="createForm" class="modal">
+        <div class="modal-content">
+            <h4>Post creating</h4>
+
+            <div class="input-field">
+                <textarea id="title" class="materialize-textarea"></textarea>
+                <label for="title">Post Name:</label>
+            </div>
+            <div class="input-field">
+                <textarea id="text" class="materialize-textarea"></textarea>
+                <label for="text">Post description:</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn-large" id="createPost">Create post</a>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="index.js"> </script>
+</body>
+
+</html>
