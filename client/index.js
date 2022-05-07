@@ -3,8 +3,9 @@ const card = post => {
                 <div class="card z-depth-4">
                     <div class="card-content">
                         <span class="card-title">${post.title}</span>
-                        <p style="white-space: pre-line">${post.text}</p>
-                            <small>new Date (post.date).toLocaleDataString()</small> 
+                        <p style="white-space: pre-line">${post.text}</p> 
+                            <small class="right">${new Date(post.date).getHours()}:${new Date(post.date).getMinutes()}:${new Date(post.date).getSeconds()}</small> <br>
+                            <small class="right">${new Date(post.date).toLocaleDateString()}</small> 
                     </div>
                     <div class="card-action">
                         <button class = "btn btn-small red js-remove" data-id="${post._id}">
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         posts = backendPosts.concat()
         setTimeout(() => {
             renderPosts(posts)
-        }, 2000)
+        }, 1000)
     })
 
     modal = M.Modal.init(document.querySelector('.modal'))
@@ -66,11 +67,14 @@ function renderPosts(_posts = []) {
 function onCreatePost(){
     const $title = document.querySelector('#title')
     const $text = document.querySelector('#text')
+    const $imageURL = document.querySelector('#img')
+
 
     if($title.value && $text.value){
         const newPost = {
             title:$title.value,
-            text:$text.value
+            text:$text.value,
+            imageURL:$imageURL.value,
         }
         PostApi.create(newPost).then(post => {
             posts.push(post)
@@ -79,15 +83,16 @@ function onCreatePost(){
         modal.close()
         $title.value=''
         $text.value=''
+        $imageURL.value=''
         M.updateTextFields()
     }
 }
 
 function onDeletePost(event){
     if(event.target.classList.contains('js-remove') || event.target.parentNode.classList.contains('js-remove')){
-        const descision = confirm('Вы уверены что хотите удалить пост?')
+        const decision = confirm('Вы уверены что хотите удалить пост?')
 
-        if(descision){
+        if(decision){
             const id = event.target.getAttribute('data-id') || event.target.parentNode.getAttribute('data-id')
             PostApi.remove(id).then(() => {
                 const postIndex = posts.findIndex(post => post._id === id)

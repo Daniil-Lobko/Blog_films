@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const keys = require('./keys')
 const postRouter = require('./routes/post')
-
+const authRouter = require('./routes/authRouter.js')
 
 
 const port = process.env.PORT || 5000
@@ -16,9 +16,9 @@ mongoose.connect(keys.mongoURI)
 
 const app = express()
 app.use(bodyParser.json())
+app.use('/api/auth', authRouter)
 app.use('/api/post', postRouter)
 app.use(express.static(clientPath))
-
 
 app.listen(port, () => {
     console.log(`Server has been started on port ${port}`)

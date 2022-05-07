@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Post = require('../models/Post')
-const {request} = require("express");
+const {request} = require('express');
 
 //http://localhost:5000/api/post (GET)
 router.get('/', async (req,res) => {
@@ -17,7 +17,8 @@ router.post('/',async (req,res) => {
 
     const postData = {
         title:req.body.title,
-        text:req.body.text
+        text:req.body.text,
+        imageURL:req.body.imageURL
     }
 
     const post = new Post(postData)
