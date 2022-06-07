@@ -16,9 +16,10 @@ mongoose.connect(keys.mongoURI)
 
 const app = express()
 app.use(bodyParser.json())
-app.use('/api/auth', authRouter)
-app.use('/api/post', postRouter)
 app.use(express.static(clientPath))
+app.use('/api/post', postRouter)
+app.use('/api/auth', authRouter)
+
 
 app.listen(port, () => {
     console.log(`Server has been started on port ${port}`)
