@@ -20,9 +20,7 @@ router.post('/',async (req,res) => {
         text:req.body.text,
         imageURL:req.body.imageURL
     }
-
     const post = new Post(postData)
-
     await post.save()
     res.status(201).json(post)
 })

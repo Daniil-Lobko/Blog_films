@@ -1,0 +1,15 @@
+.Reg{
+    display: inline-block;
+    width: 20%;
+    position: center;
+    margin-left:10px;
+    margin-right:;
+}
+
+.auth{
+    display: inline-block;
+    width: 20%;
+    position: center;
+    margin-left:auto;
+    margin-right:auto ;
+}

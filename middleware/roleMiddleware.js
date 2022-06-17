@@ -18,9 +18,9 @@ module.exports = function (roles){
                     hasRole = true
                 }
             })
-            if(!hasRole){
-                return res.status(403).json({message:"У вас нет доступа"})
-            }
+            // if(!hasRole){
+            //     return res.status(403).json({message:"У вас нет доступа"})
+            // }
             next()
         } catch (e) {
             console.log(e)
