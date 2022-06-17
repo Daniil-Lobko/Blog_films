@@ -10,6 +10,10 @@ const postSchema = new Schema({
         type: String,
         required:true
     },
+    author:{
+        type:String
+        // default:'authorTEST'
+    },
     date:{
         type: Date,
         default: Date.now
