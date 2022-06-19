@@ -1,15 +1,472 @@
-.Reg{
-    display: inline-block;
-    width: 20%;
-    position: center;
-    margin-left:10px;
-    margin-right:10px;
+html,
+body {
+    height: 100%;
+    background: #C5C5C5;
 }
 
-.auth{
+html,
+body,
+input,
+textarea,
+buttons {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+
+#upMenu {
+    background-color: #96BDAA;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    height: 80px;
+    border: 1px solid #000000;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+#my-logo {
+    margin-top: 2px;
+}
+
+.line {
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-left: 50px;
+    height: 0;
+    border: 2px solid #5C806E;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.search-box {
+    position: absolute;
+    left: 15%;
+    top: 21px;
+    background-color: #5C806E;
+    height: 40px;
+    border-radius: 40px;
+
+}
+
+.search_btn {
+    justify-content: center;
+    align-items: center;
+    color: #444B48;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding-right: 5px;
+    padding-left: 0;
+}
+
+.search-txt {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin-left: 7px;
+    color: #C5C5C5;
+    font-size: 16px;
+    transition: .4s;
+    line-height: 40px;
+    width: 0;
+}
+
+.search-box:hover .search-txt {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.buttonsPanel {
     display: inline-block;
-    width: 20%;
-    position: center;
-    margin-left:auto;
-    margin-right:auto ;
+    float: right;
+    margin: 20px;
+    padding-right: 70px;
+}
+
+.button {
+    /* Сбрасываем дефолтные стили */
+    border: none;
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Book Antiqua", serif;
+    padding: 12px 16px;
+    border-radius: 20px;
+    color: #000000;
+}
+
+.button i {
+    margin-right: 4px;
+}
+
+.button + .button {
+    margin-left: 6px;
+}
+
+.button.LogIn {
+    background: #5C806E;
+}
+
+.button.Register {
+    background: #5C806E;
+}
+
+.button:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button:hover.LogIn {
+    background: #5C806E;
+}
+
+.button:hover.Register {
+    background: #5C806E;
+}
+
+.button:active {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button:active.blue {
+    background: #5C806E;
+}
+
+.button:active.purple {
+    background: #5C806E;
+}
+
+.upperInfo {
+    margin-top: 20px;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+img#my-img {
+    border-radius: 40px;
+    margin-top: 20px;
+    width: 588px;
+}
+
+.header {
+    font-size: 26px;
+}
+
+.pop_up_LogIn, .pop_up_Register {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+    z-index: 2;
+    transform: translateY(-44.5%) scale(0);
+    transition: .4s ease-in-out;
+}
+
+.pop_up_LogIn.active, .pop_up_Register.active {
+    transform: translateY(0%) scale(100%);
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.pop_up_logIn_container, .pop_up_Register_container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+}
+
+.pop_up_LogIn_body, .pop_up_Register_body {
+    margin: auto;
+    width: 500px;
+    background-color: #C5C5C5;
+    border-radius: 20px;
+    text-align: center;
+    padding: 60px 15px 80px 15px;
+    position: relative;
+
+}
+
+.pop_up_LogIn_body h1, .pop_up_Register_body h1 {
+    font-size: 22px;
+    font-family: "Book Antiqua", serif;
+    font-weight: 600;
+    color: #444B48;
+}
+
+.pop_up_LogIn_body input, .pop_up_Register_body input {
+    display: block;
+    margin: 25px auto 0 auto;
+    width: 330px;
+    padding: 17px 20px;
+    background-color: #96BDAA;
+    border-radius: 10px;
+    border: 2px solid #444B48;
+    font-family: Roboto, Verdana, Tahoma, sans, serif;
+    font-size: 18px;
+    color: #444B48;
+}
+
+.pop_up_LogIn_body button, .pop_up_Register_body button {
+    cursor: pointer;
+    display: block;
+    width: 200px;
+    margin: 60px auto 0 auto;
+    padding: 20px 0;
+    font-family: "Book Antiqua", serif;
+    font-weight: 550;
+    font-size: 22px;
+    border: 2px solid #444B48;
+    color: #444B48;
+    border-radius: 10px;
+    background-color: #5C806E;
+}
+
+.pop_up_LogIn_close, .pop_up_Register_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.container {
+    margin-left: 20%;
+    width: 900px;
+    color: #000000;
+    padding-top: 10px !important;
+}
+
+#btn_submit_log, #btn_submit_reg {
+    cursor: pointer;
+    display: block;
+    width: 200px;
+    margin: 60px auto 0 auto;
+    padding: 20px 0;
+    font-family: "Book Antiqua", serif;
+    font-weight: 550;
+    font-size: 22px;
+    border: 2px solid #444B48;
+    color: #444B48;
+    border-radius: 10px;
+    background-color: #5C806E;
+}
+
+#card-content {
+    margin-left: 20%;
+    width: 900px;
+    color: #000000;
+    font-family: "Book Antiqua", serif;
+
+}
+
+.card {
+    margin: 0.5rem 0 1rem 0;
+    background-color: #dcdfd6;
+    padding: 10px 30px 15px;
+    -webkit-transition: -webkit-box-shadow .25s;
+    transition: -webkit-box-shadow .25s;
+    transition: box-shadow .25s, -webkit-box-shadow .25s;
+    border: 2px solid #5C806E;
+    border-radius: 20px;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.2);
+
+
+}
+
+.z-depth-4 {
+    -webkit-box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -7px rgb(0 0 0 / 20%);
+}
+
+.z-depth-1, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+    -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.material-icons {
+    font-family: 'Book Antiqua', serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.btn, .btn-large, .btn-small {
+    text-decoration: none;
+    color: #fff;
+    background-color: #5C806E;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    display: flex;
+}
+
+.btn-large {
+    height: auto;
+    width: auto;
+    font-size: 15px;
+    padding: 10px !important;
+}
+
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out;
+}
+
+textarea {
+    writing-mode: horizontal-tb !important;
+    font-family: monospace;
+    text-rendering: auto;
+    color: #444B48;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    resize: vertical;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    background-color: #C5C5C5;
+    column-count: initial !important;
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(133, 133, 133);
+    border-image: initial;
+    padding: 2px;
+}
+
+.right {
+    margin-left: 90%;
+}
+
+span {
+    font-family: "Book Antiqua", serif;
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.fixed-action-btn {
+    display: inline-block;
+    float: right;
+    margin: 22px;
+    padding-right: 0;
+}
+
+i {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-large.red {
+    border-radius: 50%;
+}
+
+.large.material-icons {
+    margin-top: -5px;
+}
+
+#postForm {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 2;
+    transform: translateY(-44.5%) scale(0);
+    transition: .4s ease-in-out;
+}
+
+#postForm.active {
+    transform: translateY(0%) scale(100%);
+    background-color: rgba(0, 0, 0, .7);
+
+}
+
+#postForm_container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#createForm {
+    margin: auto;
+    width: 500px;
+    background-color: #C5C5C5;
+    border-radius: 20px;
+    text-align: center;
+    padding: 30px 15px 30px 15px;
+    position: relative;
+}
+
+#createForm h4 {
+    font-size: 26px;
+    font-family: "Book Antiqua", serif;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #444B48;
+}
+
+#createForm textarea {
+    display: block;
+    margin: 10px auto 10px auto;
+    width: 330px;
+    padding: 17px 20px;
+    background-color: #96BDAA;
+    border-radius: 10px;
+    border: 2px solid #444B48;
+    font-family: "Book Antiqua", serif;
+    font-size: 14px;
+    color: #444B48;
+}
+
+#createForm label {
+    margin: 2px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #444B48;
+}
+
+.pop_up_Form_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 21px;
+    cursor: pointer;
 }

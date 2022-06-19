@@ -15,6 +15,7 @@ const card = post => {
                     </div>
                 </div>`
 }
+
 let posts = []
 let users = []
 
@@ -26,26 +27,36 @@ const USERS_URL = '/api/auth/users'
 const BASE_URL = '/api/post'
 const REG_URL = '/api/auth/registration'
 const AUTH_URL = '/api/auth/login'
+const openPopUpLogIn = document.getElementById('login');
+const closePopUpLogIn = document.getElementById('pop_up_LogIn_close');
+const popUpLogIn = document.getElementById('pop_up_LogIn');
+const openPopUpRegister = document.getElementById('register');
+const closePopUpRegister = document.getElementById('pop_up_Register_close');
+const popUpRegister = document.getElementById('pop_up_Register');
+const openPopUpForm = document.getElementById('btn_add_post');
+const closePopUpForm2 = document.getElementById('pop_up_Form_close');
+const popUpForm = document.getElementById('postForm');
+
 
 class PostApi {
     static fetch() {
         return fetch(BASE_URL, {method: 'get'}).then(res => res.json())
     }
 
-    static create(post){
-        return fetch(BASE_URL,{
-            method:'post',
-            body:JSON.stringify(post),
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
+    static create(post) {
+        return fetch(BASE_URL, {
+            method: 'post',
+            body: JSON.stringify(post),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
         }).then(res => res.json())
     }
 
-    static remove(id){
-        return fetch(`${BASE_URL}/${id}`,{
-            method:'delete'
+    static remove(id) {
+        return fetch(`${BASE_URL}/${id}`, {
+            method: 'delete'
         }).then(res => res.json())
     }
 }
@@ -57,12 +68,41 @@ document.addEventListener('DOMContentLoaded', () => {
             renderPosts(posts)
         }, 1000)
     })
-    modal = M.Modal.init(document.querySelector('.modal'))
+    modal = M.Modal.init(document.querySelector('#postForm'))
     modalAuth = M.Modal.init(document.querySelector('.modalAuth'))
-    document.querySelector('#createPost').addEventListener('click',onCreatePost)
-    document.querySelector('#posts').addEventListener('click',onDeletePost)
-    document.querySelector('#RegBTN').addEventListener('click', registration)
-    document.querySelector('#AuthBTN').addEventListener('click', auth)
+    document.querySelector('#createPost').addEventListener('click', onCreatePost)
+    document.querySelector('#posts').addEventListener('click', onDeletePost)
+    document.querySelector('#btn_submit_reg').addEventListener('click', registration)
+    document.querySelector('#btn_submit_log').addEventListener('click', auth)
+
+})
+openPopUpLogIn.addEventListener('click', () => {
+    popUpLogIn.classList.add('active');
+})
+
+closePopUpLogIn.addEventListener('click', () => {
+    popUpLogIn.classList.remove('active');
+})
+
+openPopUpRegister.addEventListener('click', () => {
+    popUpRegister.classList.add('active');
+})
+closePopUpRegister.addEventListener('click', () => {
+    popUpRegister.classList.remove('active');
+})
+document.querySelector('#btn_submit_log').addEventListener('click', () => {
+    popUpLogIn.classList.remove('active');
+})
+document.querySelector('#btn_submit_reg').addEventListener('click', () => {
+    popUpRegister.classList.remove('active');
+})
+
+openPopUpForm.addEventListener('click', () => {
+    popUpForm.classList.add('active');
+})
+
+closePopUpForm2.addEventListener('click', () => {
+    popUpForm.classList.remove('active');
 })
 
 function renderPosts(_posts = []) {
@@ -74,27 +114,30 @@ function renderPosts(_posts = []) {
         $posts.innerHTML = `<div class = "center">0 posts on page.</div>`
     }
 }
+
 class RegApi {
     static fetch() {
         return fetch(REG_URL, {method: 'get'}).then(res => res.json())
     }
-    static create(USER){
-        return fetch(REG_URL,{
-            method:'post',
-            body:JSON.stringify(USER),
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
+
+    static create(USER) {
+        return fetch(REG_URL, {
+            method: 'post',
+            body: JSON.stringify(USER),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
         }).then(res => res.json())
     }
 }
+
 class UsersApi {
     static fetch(token) {
         return fetch(USERS_URL, {
             method: 'get',
-            headers:{
-                'Authorization':`Bearer ${token}`
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
         }).then(res => res.json())
     }
@@ -105,47 +148,49 @@ class AuthApi {
         return fetch(AUTH_URL, {method: 'post'}).then(res => res.json())
     }
 
-    static login(USER){
-        return fetch(AUTH_URL,{
-            method:'post',
-            body:JSON.stringify(USER),
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
+    static login(USER) {
+        return fetch(AUTH_URL, {
+            method: 'post',
+            body: JSON.stringify(USER),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }
         })
     }
 }
 
-function onCreatePost(){
+function onCreatePost() {
     const $title = document.querySelector('#title')
     const $text = document.querySelector('#text')
     const $author = User.username
     console.log(User.username)
-    if($title.value && $text.value){
+    if ($title.value && $text.value && $author) {
         const newPost = {
-            title:$title.value,
-            text:$text.value,
+            title: $title.value,
+            text: $text.value,
             author: $author,
         }
+        modal.close()
         PostApi.create(newPost).then(post => {
             posts.push(post)
             renderPosts(posts)
         })
         modal.close()
-        $title.value=''
-        $text.value=''
+        $title.value = ''
+        $text.value = ''
         $author: ''
         M.updateTextFields()
     }
+
 }
 
 async function auth() {
-    const $username = document.querySelector('#loginAuth')
-    const $password = document.querySelector('#passwordAuth')
+    const $username = document.querySelector('#username1')
+    const $password = document.querySelector('#password1')
     console.log($username.value)
     if ($username.value && $password.value) {
-         User = {
+        User = {
             username: $username.value,
             password: $password.value,
         }
@@ -156,23 +201,22 @@ async function auth() {
         console.log(token)
         console.log(User.username + ' ' + User.password)
         const result = await UsersApi.fetch(token)
-        let i=0;
-        for(let i = 0; User.username != result[i].username; i++){
+        let i = 0;
+        for (let i = 0; User.username != result[i].username; i++) {
         }
         console.log(result[i])
 
     }
 }
 
+function registration() {
+    const $login = document.querySelector('#username2')
+    const $password = document.querySelector('#password2')
 
-function registration(){
-    const $login = document.querySelector('#login')
-    const $password = document.querySelector('#password')
-
-    if($login.value && $password.value){
+    if ($login.value && $password.value) {
         const newUser = {
-            username:$login.value,
-            password:$password.value,
+            username: $login.value,
+            password: $password.value,
         }
         RegApi.create(newUser).then(newUser => {
             users.push(newUser)
@@ -181,17 +225,18 @@ function registration(){
 }
 
 
-function onDeletePost(event){
-    if(event.target.classList.contains('js-remove') || event.target.parentNode.classList.contains('js-remove')){
+function onDeletePost(event) {
+    if (event.target.classList.contains('js-remove') || event.target.parentNode.classList.contains('js-remove')) {
         const decision = confirm('Вы уверены что хотите удалить пост?')
 
-        if(decision){
+        if (decision) {
             const id = event.target.getAttribute('data-id') || event.target.parentNode.getAttribute('data-id')
             PostApi.remove(id).then(() => {
                 const postIndex = posts.findIndex(post => post._id === id)
-                posts.splice(postIndex,1)
+                posts.splice(postIndex, 1)
                 renderPosts(posts)
             })
         }
     }
 }
+

@@ -2,57 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="reset.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="index.js" defer></script>
 </head>
 <body>
 
-<!--<form (submit)="onSubmit()" class="auth" name="auth">-->
-<!--<div class="input-field">-->
-<!--    <input type="text" [(ngModel)]="login" name="login" class="form-control"> <br>-->
-<!--</div>-->
-<!--<div class="input-field">-->
-<!--    <input type="password" [(ngModel)]="password" name="password" class="form-control"><br>-->
-<!--</div>-->
-<!--        <button class="btn btn-success" type="submit" onclick="hello()">Войти</button>-->
-<!--</form>-->
-
-<div id="modalReg" class="Reg">
-    <div class="modal-content">
-        <h4>Registration</h4>
-        <div class="input-field">
-            <textarea id="login" class="materialize-textarea"></textarea>
-            <label for="login">Login:</label>
+<div id="upMenu">
+    <div class="topBar">
+        <img src="images/logo.png" id="my-logo" alt="" style="width: 170px">
+        <div class="search-box">
+            <label>
+                <input type="text" class="search-txt" placeholder="Search">
+            </label>
+            <a href="" class="search_btn"><i class="fa fa-search" aria-hidden="true"></i></a>
         </div>
-        <div class="input-field">
-            <textarea id="password" class="materialize-textarea"></textarea>
-            <label for="password">Password:</label>
+        <div class="buttonsPanel">
+            <button id="login" class="button LogIn">Log In</button>
+            <button id="register" class="button Register">Register</button>
         </div>
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-light btn-large" id="RegBTN">Registration</a>
+        <div class="fixed-action-btn" id="fixed-action-btn">
+            <a class="btn-floating btn-large red modal-trigger" id="btn_add_post" data-target="createForm">
+                <i class="large material-icons">&#10010</i>
+            </a>
+        </div>
     </div>
 </div>
-
-<div id="modalAuth" class="auth">
-    <div class="modal-content">
-        <h4>Login</h4>
-        <div class="input-field">
-            <textarea id="loginAuth" class="materialize-textarea"></textarea>
-            <label for="loginAuth">Login:</label>
+<div class="pop_up_LogIn" id="pop_up_LogIn">
+    <div class="pop_up_logIn_container">
+        <div class="pop_up_LogIn_body" id="pop_up_LogIn_body">
+            <form action="">
+                <h1>LOGIN FORM</h1>
+                <label for="username1"></label><input type="text" placeholder="Username" required="" id="username1"/>
+                <label for="password1"></label><input type="password" placeholder="Password" required=""
+                                                      id="password1"/>
+                <div id="btn_submit_log">Submit</div>
+            </form>
+            <div class="pop_up_LogIn_close" id="pop_up_LogIn_close">&#10006</div>
         </div>
-        <div class="input-field">
-            <textarea id="passwordAuth" class="materialize-textarea"></textarea>
-            <label for="passwordAuth">Password:</label>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-light btn-large" id="AuthBTN">Login</a>
     </div>
 </div>
-
+<div class="pop_up_Register" id="pop_up_Register">
+    <div class="pop_up_Register_container">
+        <div class="pop_up_Register_body" id="pop_up_Register_body">
+            <form action="">
+                <h1>REGISTRATION</h1>
+                <label for="username2"></label><input type="text" placeholder="Username" required="" id="username2"/>
+                <label for="password2"></label><input type="password" placeholder="Password" required=""
+                                                      id="password2"/>
+                <div id="btn_submit_reg">Submit</div>
+            </form>
+            <div class="pop_up_Register_close" id="pop_up_Register_close">&#10006</div>
+        </div>
+    </div>
+</div>
+<div class="line"></div>
+<div class="upperInfo">
+    <b>
+        <div class="header">RECENT REVIEWS</div>
+    </b>
+</div>
 <div class="container" style="padding-top: 50px;">
     <div class="row">
         <div class="col s12 m8 offset-m2 l6 offset-l3" id="posts">
@@ -76,33 +88,32 @@
     </div>
 </div>
 
-<div class="fixed-action-btn">
-    <a class="btn-floating btn-large red modal-trigger" data-target="createForm">
-        <i class="large material-icons">add</i>
-    </a>
-</div>
 
-<div id="createForm" class="modal">
-    <div class="modal-content">
-        <h4>Post creating</h4>
-
-        <div class="input-field">
-            <textarea id="title" class="materialize-textarea"></textarea>
-            <label for="title"></label>
-        </div>
-        <div class="input-field">
-            <textarea id="text" class="materialize-textarea"></textarea>
-            <label for="text">Post description:</label>
+<div id="postForm">
+    <div id="postForm_container">
+        <div id="createForm" class="modal">
+            <div class="modal-content">
+                <h4>POST CREATING</h4>
+                <div class="input-field">
+                    <label for="title">Your title</label><br>
+                    <textarea id="title" class="materialize-textarea"></textarea>
+                </div>
+                <div class="input-field">
+                    <label for="text">Your post description</label><br>
+                    <textarea id="text" class="materialize-textarea"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="waves-effect waves-light btn-large" id="createPost">Create post</a>
+            </div>
+            <div class="pop_up_Form_close" id="pop_up_Form_close">&#10006</div>
+            <i id="information">You can't post if you're not logged in</i>
         </div>
     </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-light btn-large" id="createPost">Create post</a>
-    </div>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="index.js"></script>
+<div class="line"></div>
 </body>
 
 </html>
